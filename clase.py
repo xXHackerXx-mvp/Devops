@@ -10,6 +10,22 @@ Este módulo ilustra buenas prácticas de diseño de clases en Python:
 - Registro de historial de transacciones
 """
 
+# ============================================================
+# Comentario de revisión (Juan Diego):
+# Buen uso de @property para exponer 'saldo' e 'historial' de
+# forma controlada (solo lectura), evitando que se modifiquen
+# directamente desde fuera de la clase. También está bien
+# separar las excepciones personalizadas (SaldoInsuficienteError,
+# MontoInvalidoError) en vez de usar excepciones genéricas.
+# Sugerencia: el método transferir() podría fallar a mitad de
+# camino si depositar() lanza un error después de que retirar()
+# ya se ejecutó, dejando el saldo descontado sin acreditar en
+# destino. Convendría validar antes o usar un manejo con
+# rollback.
+# ============================================================
+
+
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
